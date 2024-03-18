@@ -29,8 +29,3 @@ services:
 networks:
   internal-dev:
     external: false
-
-
-# - MYSQL_DATABASE=mysql
-# - MYSQL_USER=dev
-# - MYSQL_PASSWORD=password
