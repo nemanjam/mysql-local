@@ -14,13 +14,18 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - internal-dev
+    # extra_hosts:
+    #   - 'host.docker.internal:host-gateway'
+
 
   adminer-dev:
     image: adminer:4.8.1-standalone
     container_name: adminer-dev
     restart: unless-stopped
-    environment:
-      ADMINER_DEFAULT_SERVER: mysql-dev
+    # environment:
+      # ADMINER_DEFAULT_SERVER: mysql-dev
+      # ADMINER_DEFAULT_SERVER: host.docker.internal:3306
+      # ADMINER_DEFAULT_SERVER: localhost
     ports:
       - '8080:8080'
     depends_on:
