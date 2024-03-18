@@ -13,20 +13,23 @@ services:
       - ./db-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - external-host
+      - internal-dev
 
   adminer-dev:
     image: adminer:4.8.1-standalone
     container_name: adminer-dev
     restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql-dev
     ports:
       - '8080:8080'
     depends_on:
-      - mysql-dev
+      - mysql-dev    
     networks:
-      - external-host
+      - internal-dev
 
 networks:
-  external-host:
-    external: true
+  internal-dev:
+    external: false
+    name: internal-dev
 
