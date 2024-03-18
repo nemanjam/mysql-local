@@ -5,20 +5,20 @@ services:
     image: mysql:8.3.0
     container_name: mysql-dev
     restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
     ports:
       - '3306:3306'
-    environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_DATABASE=
-    volumes:
-      - ./db-data:/var/lib/mysql
-      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - internal-dev
+    volumes:
+      - ./db-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   adminer-dev:
     image: adminer:4.8.1-standalone
     container_name: adminer-dev
+    restart: unless-stopped
     ports:
       - '8080:8080'
     depends_on:
@@ -29,3 +29,8 @@ services:
 networks:
   internal-dev:
     external: false
+
+
+# - MYSQL_DATABASE=mysql
+# - MYSQL_USER=dev
+# - MYSQL_PASSWORD=password
